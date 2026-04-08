@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EBOEMG 2026 — Encontro das Bandas e Orquestras Evangélicas de Minas Gerais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #08090f; color: #e8e4d8; overflow-x: hidden; }
+    :root {
+      --bg: #08090f; --bg2: #0f1118; --bg3: #141720;
+      --gold: #d4a843; --gold2: #f0c85a; --gold3: #fae8a0;
+      --cream: #e8e4d8; --white: #ffffff;
+      --blue: #4a8fc2; --green: #4caf82;
+      --border: rgba(212,168,67,0.22); --border2: rgba(255,255,255,0.07);
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.5rem; background: rgba(8,9,15,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border2); transition: padding .3s; }
+    nav.scrolled { padding: .65rem 2.5rem; }
+    .nav-logo { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: .08em; }
+    .nav-logo-sub { font-size: .6rem; letter-spacing: .22em; color: var(--cream); opacity: .4; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; opacity: .65; transition: color .2s, opacity .2s; }
+    .nav-links a:hover { color: var(--gold); opacity: 1; }
+    .nav-cta { background: var(--gold) !important; color: var(--bg) !important; padding: .45rem 1.2rem !important; border-radius: 3px; font-weight: 700 !important; opacity: 1 !important; }
+    .nav-cta:hover { background: var(--gold2) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: .3rem; }
+    .hamburger span { width: 24px; height: 2px; background: var(--cream); border-radius: 1px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--bg2); z-index: 199; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--cream); text-decoration: none; font-size: 1.3rem; font-family: 'DM Serif Display', serif; transition: color .2s; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--cream); font-size: 2rem; cursor: pointer; }
+    @media (max-width: 860px) { .nav-links { display: none; } .hamburger { display: flex; } }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 9rem 2rem 5rem; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 75% 35%, rgba(74,143,194,0.1) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 20% 70%, rgba(212,168,67,0.07) 0%, transparent 60%), linear-gradient(160deg, #0f1320 0%, #08090f 55%, #0c0e16 100%); }
+    .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(212,168,67,.05) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; text-align: center; max-width: 900px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .6rem; border: 1px solid var(--border); padding: .4rem 1.1rem; border-radius: 30px; font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; background: rgba(212,168,67,.05); animation: fadeUp .7s ease both; }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 13vw, 11rem); line-height: .88; color: var(--white); letter-spacing: .04em; animation: fadeUp .7s .08s ease both; }
+    .hero-title .accent { color: var(--gold); }
+    .hero-title .outline { -webkit-text-stroke: 2px rgba(255,255,255,.15); color: transparent; }
+    .hero-subtitle { margin: 1.8rem auto 1rem; font-family: 'DM Serif Display', serif; font-size: clamp(1rem, 2.2vw, 1.35rem); color: var(--cream); opacity: .7; max-width: 520px; line-height: 1.6; animation: fadeUp .7s .16s ease both; }
+    .hero-date-badge { display: inline-flex; align-items: center; gap: .8rem; background: rgba(255,255,255,.05); border: 1px solid var(--border2); padding: .6rem 1.4rem; border-radius: 4px; margin-bottom: 1.5rem; animation: fadeUp .7s .22s ease both; }
+    .hero-date-badge strong { color: var(--gold); font-size: .85rem; }
+    .hero-date-badge span { font-size: .8rem; color: var(--cream); opacity: .6; letter-spacing: .1em; text-transform: uppercase; }
+    .hero-date-badge .sep { opacity: .25; }
+    .hero-free { display: inline-flex; align-items: center; gap: .5rem; background: rgba(76,175,130,.1); border: 1px solid rgba(76,175,130,.3); color: var(--green); padding: .38rem 1.1rem; border-radius: 20px; font-size: .73rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 2rem; animation: fadeUp .7s .27s ease both; }
+    .hero-verse { font-family: 'DM Serif Display', serif; font-style: italic; font-size: .9rem; color: var(--gold3); opacity: .6; margin-bottom: 2.5rem; animation: fadeUp .7s .32s ease both; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp .7s .37s ease both; }
+    .btn-primary { background: var(--gold); color: var(--bg); font-weight: 700; padding: .9rem 2.2rem; border-radius: 4px; text-decoration: none; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 4px 24px rgba(212,168,67,.3); display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,168,67,.4); }
+    .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(232,228,216,.2); padding: .9rem 2.2rem; border-radius: 4px; text-decoration: none; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: border-color .2s, color .2s; display: inline-flex; align-items: center; gap: .5rem; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-countdown { margin: 4rem auto 0; display: flex; justify-content: center; animation: fadeUp .7s .42s ease both; border: 1px solid var(--border2); border-radius: 6px; overflow: hidden; max-width: 460px; }
+    .countdown-item { flex: 1; text-align: center; padding: 1.2rem .5rem; border-right: 1px solid var(--border2); }
+    .countdown-item:last-child { border-right: none; }
+    .countdown-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); line-height: 1; display: block; }
+    .countdown-label { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); opacity: .4; margin-top: .2rem; }
+
+    /* SHARED */
+    section { padding: 6rem 2rem; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .7rem; display: block; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--white); letter-spacing: .04em; line-height: 1; }
+    .section-divider { width: 40px; height: 2px; background: var(--gold); margin: 1rem auto; border-radius: 1px; }
+    .section-desc { font-size: .95rem; color: var(--cream); opacity: .6; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    /* SOBRE */
+    #sobre { background: var(--bg2); }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .sobre-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--white); margin-bottom: 1.2rem; line-height: 1.3; }
+    .sobre-text p { color: var(--cream); opacity: .65; line-height: 1.85; font-size: .95rem; margin-bottom: 1rem; }
+    .sobre-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    .tag { font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .85rem; border-radius: 20px; border: 1px solid var(--border); color: var(--gold); background: rgba(212,168,67,.06); }
+    .sobre-actions { margin-top: 1.8rem; }
+    .sobre-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card { background: rgba(255,255,255,.03); border: 1px solid var(--border2); border-radius: 6px; padding: 1.5rem; text-align: center; transition: border-color .2s; }
+    .stat-card:hover { border-color: var(--border); }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+    .stat-desc { font-size: .74rem; color: var(--cream); opacity: .5; letter-spacing: .08em; margin-top: .3rem; }
+    @media (max-width: 768px) { .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.78); z-index: 500; align-items: center; justify-content: center; padding: 1.5rem; backdrop-filter: blur(6px); }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; padding: 3rem; }
+    .modal-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: var(--cream); opacity: .5; font-size: 1.6rem; cursor: pointer; transition: opacity .2s; line-height: 1; }
+    .modal-close:hover { opacity: 1; }
+    .modal-tag { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; display: block; }
+    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--white); letter-spacing: .04em; margin-bottom: .5rem; }
+    .modal-divider { width: 36px; height: 2px; background: var(--gold); border-radius: 1px; margin-bottom: 1.8rem; }
+    .modal-body p { font-size: .92rem; color: var(--cream); opacity: .7; line-height: 1.85; margin-bottom: 1rem; }
+    .modal-body h4 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--gold2); margin: 1.8rem 0 .8rem; }
+    .modal-obj-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .modal-obj-list li { display: flex; gap: .8rem; font-size: .88rem; color: var(--cream); opacity: .7; line-height: 1.6; }
+    .modal-obj-list li::before { content: '✦'; color: var(--gold); font-size: .55rem; flex-shrink: 0; margin-top: .35rem; }
+    .modal-quote { border-left: 3px solid var(--gold); padding: 1rem 1.2rem; margin: 1.5rem 0; background: rgba(212,168,67,.05); border-radius: 0 4px 4px 0; }
+    .modal-quote p { font-family: 'DM Serif Display', serif; font-style: italic; font-size: .95rem; color: var(--cream); opacity: .75; margin: 0; }
+    .modal-quote cite { display: block; font-size: .72rem; color: var(--gold); opacity: .7; margin-top: .5rem; font-style: normal; letter-spacing: .1em; }
+    @media (max-width: 600px) { .modal-box { padding: 2rem 1.3rem; } }
+
+    /* MAESTRO */
+    #maestro { background: var(--bg); }
+    .maestro-card { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 3.5rem; align-items: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 3rem; }
+    .maestro-photo-wrap { position: relative; }
+    .maestro-photo { width: 100%; aspect-ratio: 3/4; border-radius: 8px; object-fit: cover; object-position: top center; display: block; }
+    .maestro-badge { position: absolute; bottom: -1rem; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--bg); font-size: .65rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: .35rem 1rem; border-radius: 20px; white-space: nowrap; }
+    .maestro-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: var(--white); letter-spacing: .05em; line-height: 1; margin: .5rem 0 1.2rem; }
+    .maestro-bio { font-size: .92rem; color: var(--cream); opacity: .65; line-height: 1.85; margin-bottom: 1rem; }
+    .maestro-bio em { color: var(--gold3); font-style: normal; opacity: 1; }
+    .maestro-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    @media (max-width: 700px) { .maestro-card { grid-template-columns: 1fr; gap: 2.5rem; } .maestro-badge { position: static; transform: none; display: inline-block; margin-top: .8rem; } }
+
+    /* OFICINAS */
+    #oficinas { background: var(--bg2); }
+    .oficinas-cta { text-align: center; margin-bottom: 3rem; }
+    .oficinas-lista { max-width: 860px; margin: 0 auto; }
+    .of-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border2); border-radius: 8px; overflow: hidden; margin-bottom: 2.5rem; }
+    .of-col:first-child { border-right: 1px solid var(--border2); }
+    .of-item { display: flex; align-items: center; gap: 1rem; padding: .95rem 1.5rem; border-bottom: 1px solid var(--border2); transition: background .2s; }
+    .of-item:last-child { border-bottom: none; }
+    .of-item:hover { background: rgba(212,168,67,.04); }
+    .of-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold); opacity: .4; min-width: 26px; line-height: 1; }
+    .of-name { font-size: .92rem; font-weight: 600; color: var(--white); }
+    .of-cta { text-align: center; }
+    .of-obs { font-size: .82rem; color: var(--cream); opacity: .45; margin-bottom: 1.4rem; line-height: 1.6; }
+    @media (max-width: 580px) { .of-cols { grid-template-columns: 1fr; } .of-col:first-child { border-right: none; border-bottom: 1px solid var(--border2); } }
+
+    /* REPERTÓRIO */
+    #repertorio { background: var(--bg); }
+    .repertorio-list { max-width: 500px; margin: 0 auto; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; text-align: center; }
+    .repertorio-list p { color: var(--cream); opacity: .7; margin-bottom: 1rem; font-size: .95rem; }
+    .repertorio-list ul { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: .7rem; }
+    .repertorio-list li { font-size: .95rem; color: var(--white); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: .6rem; }
+
+    /* PROGRAMAÇÃO */
+    #programacao { background: var(--bg2); }
+    .prog-list { max-width: 720px; margin: 0 auto; border: 1px solid var(--border2); border-radius: 8px; overflow: hidden; }
+    .prog-item { display: flex; gap: 1.2rem; align-items: flex-start; background: var(--bg2); border-bottom: 1px solid var(--border2); padding: 1.2rem 1.6rem; transition: background .2s; }
+    .prog-item:last-child { border-bottom: none; }
+    .prog-item:hover { background: rgba(212,168,67,.04); }
+    .prog-time { min-width: 70px; font-family: 'Bebas Neue', sans-serif; color: var(--gold); font-size: 1.05rem; flex-shrink: 0; }
+    .prog-info h4 { color: var(--white); font-size: .92rem; font-weight: 600; margin-bottom: .2rem; }
+    .prog-info p { color: var(--cream); opacity: .5; font-size: .8rem; line-height: 1.5; }
+    .prog-badge { margin-left: auto; font-size: .62rem; letter-spacing: .1em; padding: .22rem .65rem; border-radius: 10px; white-space: nowrap; align-self: flex-start; flex-shrink: 0; }
+    .badge-culto  { background: rgba(74,143,194,.12); color: var(--blue); border: 1px solid rgba(74,143,194,.25); }
+    .badge-oficina { background: rgba(76,175,130,.1); color: var(--green); border: 1px solid rgba(76,175,130,.25); }
+    .badge-ensaio { background: rgba(212,168,67,.1); color: var(--gold); border: 1px solid var(--border); }
+    .badge-apres  { background: rgba(160,100,220,.1); color: #b88ae0; border: 1px solid rgba(160,100,220,.25); }
+    .badge-social { background: rgba(200,100,120,.1); color: #e88aa0; border: 1px solid rgba(200,100,120,.25); }
+    .badge-enc    { background: rgba(74,143,194,.08); color: var(--blue); border: 1px solid rgba(74,143,194,.2); }
+
+    /* LOCAL */
+    #local { background: var(--bg3); }
+    .local-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+    .map-frame { border-radius: 6px; overflow: hidden; border: 1px solid var(--border2); aspect-ratio: 4/3; background: var(--bg2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; }
+    .map-frame .map-icon { font-size: 2.5rem; opacity: .22; }
+    .map-frame p { opacity: .35; font-size: .85rem; text-align: center; line-height: 1.6; }
+    .map-link { display: inline-flex; align-items: center; gap: .5rem; background: var(--gold); color: var(--bg); text-decoration: none; padding: .55rem 1.3rem; border-radius: 3px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; transition: background .2s; }
+    .map-link:hover { background: var(--gold2); }
+    .local-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--white); margin-bottom: 1.5rem; }
+    .local-detail { display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start; }
+    .local-detail-icon { font-size: 1.2rem; margin-top: .1rem; flex-shrink: 0; }
+    .local-detail-text strong { display: block; color: var(--gold); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .2rem; }
+    .local-detail-text span { color: var(--cream); opacity: .65; font-size: .9rem; line-height: 1.55; }
+    @media (max-width: 768px) { .local-grid { grid-template-columns: 1fr; } }
+
+   /* REALIZAÇÃO */
+#realizacao { background: var(--bg2); padding: 60px 0; }
+.realizacao-wrap { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+
+/* Ajuste para a nova logo integrada */
+.realizacao-logo img { 
+    height: auto; 
+    max-width: 450px; /* Aumentei um pouco para os dois logos aparecerem bem */
+    width: 100%;
+    object-fit: contain; 
+    /* Como a logo enviada é preta e seu fundo é escuro, este filtro a torna branca: */
+    filter: brightness(0) invert(1); 
+    opacity: 0.9;
+}
+
+.realizacao-nome { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); letter-spacing: .06em; line-height: 1.1; text-align: center; }
+.realizacao-nome span { color: var(--gold); }
+
+.realizacao-pastor { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 2.5rem; display: flex; align-items: center; gap: 1.8rem; max-width: 500px; width: 100%; }
+.realizacao-pastor img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--gold); flex-shrink: 0; }
+.realizacao-pastor-info { text-align: left; }
+.realizacao-pastor-cargo { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .3rem; }
+.realizacao-pastor-nome { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--white); display: block; margin-bottom: .15rem; }
+.realizacao-pastor-igreja { font-size: .8rem; color: var(--cream); opacity: .5; }
+
+.realizacao-depto { text-align: center; border: 1px solid var(--border2); border-radius: 6px; padding: 1.5rem 2rem; width: 100%; max-width: 500px; }
+.realizacao-depto p { font-size: .82rem; color: var(--cream); opacity: .4; }
+
+@media (max-width: 560px) { 
+    .realizacao-pastor { flex-direction: column; text-align: center; } 
+    .realizacao-pastor-info { text-align: center; } 
+    .realizacao-logo img { max-width: 280px; } /* Ajuste para celular */
+}
+    /* FLYERS */
+    #flyers { background: var(--bg); }
+    .flyers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+    .flyer-card { aspect-ratio: 3/4; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg2); transition: transform .3s, border-color .3s; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; padding: 2rem; }
+    .flyer-card:hover { transform: scale(1.02); border-color: var(--border); }
+    .flyer-icon { font-size: 2.5rem; opacity: .18; }
+    .flyer-label { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--white); text-align: center; opacity: .38; }
+    .flyer-sub { font-size: .7rem; color: var(--cream); opacity: .22; text-align: center; letter-spacing: .1em; }
+
+    /* CONTATO */
+    #contato { background: var(--bg3); }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; max-width: 860px; margin: 0 auto; }
+    .contato-card { background: rgba(255,255,255,.025); border: 1px solid var(--border2); border-radius: 6px; padding: 1.8rem; text-align: center; transition: border-color .2s, background .2s; }
+    .contato-card:hover { border-color: var(--border); background: rgba(212,168,67,.04); }
+    .contato-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+    .contato-tipo { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
+    .contato-val { color: var(--cream); font-size: .9rem; opacity: .65; }
+    .contato-val a { color: var(--cream); text-decoration: none; transition: color .2s; }
+    .contato-val a:hover { color: var(--gold); }
+    @media (max-width: 580px) { .contato-grid { grid-template-columns: 1fr; } }
+
+    /* FOOTER */
+    footer { background: #040508; border-top: 1px solid var(--border2); padding: 3.5rem 2rem; text-align: center; }
+    .footer-logo-img { height: 60px; object-fit: contain; opacity: .55; filter: brightness(0) invert(1); margin-bottom: .8rem; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); letter-spacing: .08em; margin-bottom: .3rem; }
+    .footer-sub { font-size: .68rem; letter-spacing: .18em; color: var(--cream); opacity: .28; text-transform: uppercase; }
+    .footer-realizacao { font-size: .65rem; letter-spacing: .14em; color: var(--cream); opacity: .22; text-transform: uppercase; margin-top: .4rem; }
+    .footer-links { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 1.5rem; }
+    .footer-links a { color: var(--cream); opacity: .35; text-decoration: none; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; transition: opacity .2s, color .2s; }
+    .footer-links a:hover { opacity: 1; color: var(--gold); }
+    .footer-social { display: flex; gap: .8rem; justify-content: center; margin-bottom: 2rem; }
+    .social-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; color: var(--cream); text-decoration: none; font-size: .9rem; transition: border-color .2s, color .2s, background .2s; }
+    .social-btn:hover { border-color: var(--border); color: var(--gold); background: rgba(212,168,67,.07); }
+    .footer-copy { font-size: .7rem; color: var(--cream); opacity: .18; }
+    @media (max-width: 480px) { .countdown-num { font-size: 2.2rem; } }
+
+    /* PROFESSOR MODAL */
+    .prof-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.82); z-index:600; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(6px); }
+    .prof-modal-overlay.open { display:flex; }
+    .prof-modal-box { background:var(--bg2); border:1px solid var(--border); border-radius:10px; max-width:680px; width:100%; max-height:88vh; overflow-y:auto; position:relative; padding:2.5rem; }
+    .prof-modal-close { position:absolute; top:1rem; right:1.3rem; background:none; border:none; color:var(--cream); opacity:.5; font-size:1.5rem; cursor:pointer; }
+    .prof-modal-close:hover { opacity:1; }
+    .prof-modal-header { display:flex; gap:1.5rem; align-items:flex-start; margin-bottom:1.5rem; }
+    .prof-modal-foto { width:100px; height:100px; border-radius:50%; object-fit:cover; object-position:top; border:2px solid var(--gold); flex-shrink:0; }
+    .prof-modal-foto-placeholder { width:100px; height:100px; border-radius:50%; background:var(--bg3); border:2px solid var(--border2); display:flex; align-items:center; justify-content:center; font-size:2.2rem; flex-shrink:0; }
+    .prof-modal-title { display:flex; flex-direction:column; gap:.3rem; }
+    .prof-modal-naipe { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); }
+    .prof-modal-nome  { font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--white); line-height:1.2; }
+    .prof-modal-body  { font-size:.9rem; color:var(--cream); opacity:.72; line-height:1.85; }
+    .prof-modal-body p { margin-bottom:.8rem; }
+    /* Card clicável */
+    .professor-card { cursor:pointer; }
+    .professor-card .prof-foto-overlay { position:relative; }
+    .professor-card .prof-foto-overlay::after { content:'Ver currículo →'; position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:var(--gold); font-size:.65rem; letter-spacing:.1em; text-align:center; padding:.3rem; opacity:0; transition:opacity .2s; border-radius:0 0 50% 50%; }
+    .professor-card:hover .prof-foto-overlay::after { opacity:1; }
+
+    /* COORDENADORIA E ORGANIZAÇÃO */
+    .coord-block { width: 100%; max-width: 860px; }
+    .coord-block-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; text-align: center; }
+    .coord-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .coord-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .8rem; text-align: center; transition: border-color .2s; }
+    .coord-card:hover { border-color: var(--border); }
+    .coord-foto-placeholder { font-size: 2.5rem; opacity: .2; width: 80px; height: 80px; border-radius: 50%; background: var(--bg2); border: 2px solid var(--border2); display: flex; align-items: center; justify-content: center; }
+    .coord-foto { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--gold); }
+    .coord-info { display: flex; flex-direction: column; gap: .2rem; }
+    .coord-cargo { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .coord-nome { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--white); line-height: 1.3; }
+    .pessoa-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; width: 100%; }
+    .pessoa-foto-round { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--gold); flex-shrink: 0; }
+    .pessoa-info { display: flex; flex-direction: column; gap: .2rem; }
+    .pessoa-cargo { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .pessoa-nome { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--white); }
+    .pessoa-igreja { font-size: .8rem; color: var(--cream); opacity: .5; }
+    .org-list { display: flex; flex-direction: column; gap: .8rem; width: 100%; }
+    .org-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: 1rem 1.5rem; gap: 1rem; flex-wrap: wrap; transition: border-color .2s; }
+    .org-item:hover { border-color: var(--border); }
+    .org-left { display: flex; flex-direction: column; gap: .2rem; }
+    .org-cargo { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .org-nome { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--white); }
+    .org-whatsapp { font-size: .75rem; background: rgba(76,175,130,.1); border: 1px solid rgba(76,175,130,.3); color: var(--green); padding: .35rem .9rem; border-radius: 20px; text-decoration: none; white-space: nowrap; transition: background .2s; }
+    .org-whatsapp:hover { background: rgba(76,175,130,.2); }
+
+    /* PROFESSORES */
+    #professores { background: var(--bg3); }
+    .professores-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; max-width: 1100px; margin: 0 auto; }
+    .professor-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .8rem; text-align: center; transition: border-color .2s, transform .2s; }
+    .professor-card:hover { border-color: var(--border); transform: translateY(-3px); }
+    .placeholder-card { opacity: .55; }
+    .prof-foto { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--gold); }
+    .prof-foto-placeholder { width: 90px; height: 90px; border-radius: 50%; background: var(--bg3); border: 2px dashed var(--border2); display: flex; align-items: center; justify-content: center; font-size: 2rem; opacity: .3; }
+    .prof-info { display: flex; flex-direction: column; gap: .25rem; }
+    .prof-naipe { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .prof-nome { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--white); line-height: 1.3; }
+    .prof-bio { font-size: .78rem; color: var(--cream); opacity: .5; line-height: 1.5; margin-top: .3rem; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-main">EBOEMG</span>
+      <span class="nav-logo-sub">Edição 2026</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#oficinas">Oficinas</a></li>
+      <li><a href="#programacao">Programação</a></li>
+      <li><a href="#professores">Professores</a></li>
+      <li><a href="#local">Local</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="#realizacao">Realização</a></li>
+      <li><a href="https://forms.gle/uy5AdrfwZbZbWnFG9" target="_blank" class="nav-cta">Inscreva-se</a></li>
+      <li><a href="https://drive.google.com/drive/folders/1iPYRE51cQDKpWmY1f6vKihJa0vLtc9pl?usp=sharing" target="_blank" class="nav-cta" style="background:var(--blue);">Repertório 2026</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('mob').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mob">
+  <button class="mobile-close" onclick="document.getElementById('mob').classList.remove('open')">✕</button>
+  
+  <a href="#sobre"       onclick="document.getElementById('mob').classList.remove('open')">Sobre</a>
+  <a href="#oficinas"    onclick="document.getElementById('mob').classList.remove('open')">Oficinas</a>
+  <a href="#programacao" onclick="document.getElementById('mob').classList.remove('open')">Programação</a>
+  <a href="#professores" onclick="document.getElementById('mob').classList.remove('open')">Professores</a>
+  <a href="#local"       onclick="document.getElementById('mob').classList.remove('open')">Local</a>
+  <a href="#contato"     onclick="document.getElementById('mob').classList.remove('open')">Contato</a>
+  <a href="#realizacao"  onclick="document.getElementById('mob').classList.remove('open')">Realização</a>
+  
+  <a href="https://forms.gle/uy5AdrfwZbZbWnFG9" target="_blank" onclick="document.getElementById('mob').classList.remove('open')" style="color:var(--gold); font-weight: bold;">Inscreva-se →</a>
+<a href="https://drive.google.com/drive/folders/1iPYRE51cQDKpWmY1f6vKihJa0vLtc9pl?usp=sharing" target="_blank" onclick="document.getElementById('mob').classList.remove('open')" style="color:var(--blue); font-weight: bold;">Repertório 2026 →</a>
+</div>
+
+<div class="modal-overlay" id="modal-projeto" onclick="if(event.target===this)fecharModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal()">✕</button>
+    <span class="modal-tag">Sobre o EBOEMG</span>
+    <div class="modal-title">O Projeto</div>
+    <div class="modal-divider"></div>
+    <div class="modal-body">
+      <p>O EBOEMG tem como missão fomentar a integração entre grupos musicais — com foco em bandas e orquestras — e promover o aperfeiçoamento técnico e espiritual de cristãos dedicados ao ministério da música nas igrejas evangélicas de Minas Gerais.</p>
+      
+      <p>A tradição do ensino musical na Igreja Evangélica Assembleia de Deus é notável, refletida no vasto número de corais, orquestras e grupos instrumentais em atividade. No contexto litúrgico, a música cumpre o papel fundamental de adorar a Deus, testemunhar Seus feitos e propagar a mensagem do Evangelho.</p>
+
+      <div class="modal-quote">
+        <p>"A música é o melhor remédio para quem está triste, pois devolve a paz ao coração, renova e refrigera. A música é um belo e glorioso presente de Deus, muito semelhante à Teologia."</p>
+        <cite>— Martinho Lutero (1483–1546)</cite>
+      </div>
+
+      <p>Embora haja uma produção musical rica nas igrejas, o aprendizado muitas vezes ocorre de forma empírica e intuitiva. O EBOEMG surge para profissionalizar esse cenário, estabelecendo uma rede de interlocução entre maestros e professores e oferecendo uma formação sistematizada.</p>
+
+      <h4>Objetivos do Projeto</h4>
+      <ul class="modal-obj-list">
+        <li>Proporcionar momentos de louvor e adoração através de cultos voltados à prática musical instrumental e vocal de excelência.</li>
+        <li>Promover oficinas de aperfeiçoamento técnico e espiritual, elevando o conhecimento daqueles que servem através da música.</li>
+        <li>Estabelecer uma rede de interlocução entre grupos musicais evangélicos para o intercâmbio de experiências e união entre maestros.</li>
+        <li>Realizar encontros anuais que incentivem o crescimento dos músicos através de desafios técnicos e práticos.</li>
+        <li>Fomentar a música cristã em Minas Gerais, trazendo ânimo e renovação ao ministério local.</li>
+      </ul>
+
+      <h4>Histórico</h4>
+      <p>Fundado em 2019, o EBOEMG alcança em 2026 sua <strong style="color:var(--gold2)">6ª edição</strong>. Ao longo desses anos, o evento consolidou-se como o principal encontro de música instrumental evangélica de Minas Gerais, unindo técnica, espiritualidade e comunhão.</p>
+    </div>
+  </div>
+</div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span class="eyebrow-dot"></span> 6ª Edição · Minas Gerais · 2026</div>
+      <h1 class="hero-title"><span class="outline">EBO</span><span class="accent">EMG</span></h1>
+      <p class="hero-subtitle">Encontro das Bandas e Orquestras<br>Evangélicas de Minas Gerais</p>
+      <div class="hero-date-badge">
+        <strong>30 de Maio de 2026</strong>
+        <span class="sep">|</span>
+        <span>Sábado · Belo Horizonte — MG</span>
+      </div>
+      <div class="hero-free">✦ Evento Gratuito</div>
+      <p class="hero-verse">« Louvai-o com o som de trombeta; louvai-o com saltério e harpa. » — Salmo 150:3</p>
+      <div class="hero-actions">
+        <a href="https://forms.gle/uy5AdrfwZbZbWnFG9" target="_blank" class="btn-primary">Fazer inscrição</a>
+        <button onclick="abrirModal()" class="btn-outline">Conheça o projeto</button>
+      </div>
+      <div class="hero-countdown">
+        <div class="countdown-item"><span class="countdown-num" id="cnt-days">--</span><span class="countdown-label">Dias</span></div>
+        <div class="countdown-item"><span class="countdown-num" id="cnt-hours">--</span><span class="countdown-label">Horas</span></div>
+        <div class="countdown-item"><span class="countdown-num" id="cnt-mins">--</span><span class="countdown-label">Minutos</span></div>
+        <div class="countdown-item"><span class="countdown-num" id="cnt-secs">--</span><span class="countdown-label">Segundos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <h3>Música, excelência e comunhão a serviço do Reino</h3>
+        <p>O EBOEMG é o principal encontro anual das bandas, orquestras e big bands evangélicas de Minas Gerais — um espaço de comunhão, aperfeiçoamento técnico e adoração a Deus.</p>
+        <p>Em sua <strong style="color:var(--gold2)">6ª edição</strong>, o evento reúne músicos de igrejas de toda a região, oferecendo oficinas por naipe, ensaio do grande grupo, apresentações e cultos que celebram a música como ministério.</p>
+        <div class="sobre-tags">
+          <span class="tag">Bandas</span><span class="tag">Orquestras</span>
+          <span class="tag">Big Bands</span><span class="tag">Gratuito</span>
+          <span class="tag">Minas Gerais</span>
+        </div>
+        <div class="sobre-actions">
+          <button onclick="abrirModal()" class="btn-outline" style="font-size:.78rem;padding:.7rem 1.5rem;">Conheça o projeto completo →</button>
+        </div>
+      </div>
+      <div class="sobre-stats">
+        <div class="stat-card"><div class="stat-num">2019</div><div class="stat-desc">Fundação do EBOEMG</div></div>
+        <div class="stat-card"><div class="stat-num">6ª</div><div class="stat-desc">Edição em 2026</div></div>
+        <div class="stat-card"><div class="stat-num">13</div><div class="stat-desc">Oficinas por naipe</div></div>
+        <div class="stat-card"><div class="stat-num">MG</div><div class="stat-desc">Projeção estadual</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAESTRO -->
+  <section id="maestro">
+    <div class="section-header">
+      <span class="section-tag">Destaque da edição</span>
+      <h2 class="section-title">Músico Convidado</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="maestro-card">
+      <div class="maestro-photo-wrap">
+        <img src="Joeldeamorim.png" alt="Maestro Joel de Amorim" class="maestro-photo" />
+        <div class="maestro-badge">Músico Convidado</div>
+      </div>
+      <div class="maestro-info">
+        <span class="section-tag">EBOEMG 2026</span>
+        <div class="maestro-name">Joel de Amorim</div>
+        <p class="maestro-bio">Músico, maestro e pastor com ampla experiência na direção de <em>corais, orquestras e bandas de louvor</em> em igrejas. É reconhecido por seus arranjos e partituras de música cristã, utilizados por ministérios de adoração em todo o Brasil.</p>
+        <p class="maestro-bio">Atua como maestro em denominações evangélicas, integrando música e pregação em eventos, cultos e seminários de música, com foco na <em>formação de músicos</em> e no enriquecimento do ministério de louvor nas igrejas.</p>
+        <p class="maestro-bio">Convidado para palestras e seminários de cunho musical, Joel traz uma abordagem <em>prática, devocional e técnica</em>, voltada tanto para músicos quanto para líderes de igrejas.</p>
+        <div class="maestro-tags">
+          <span class="tag">Regência</span>
+          <span class="tag">Música Sacra</span>
+          <span class="tag">Arranjos & Partituras</span>
+          <span class="tag">Pastor</span>
+          <span class="tag">Formação Musical</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFICINAS -->
+  <section id="oficinas">
+    <div class="section-header">
+      <span class="section-tag">Formação Técnica · Gratuita</span>
+      <h2 class="section-title">Oficinas por Naipe</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Aperfeiçoamento com instrutores especializados para cada família de instrumentos.</p>
+    </div>
+    <div class="oficinas-lista">
+      <div class="of-cols">
+        <div class="of-col">
+          <div class="of-item"><span class="of-num">01</span><span class="of-name">Regência</span></div>
+          <div class="of-item"><span class="of-num">02</span><span class="of-name">Flautas</span></div>
+          <div class="of-item"><span class="of-num">03</span><span class="of-name">Palhetas Duplas</span></div>
+          <div class="of-item"><span class="of-num">04</span><span class="of-name">Clarinetes</span></div>
+          <div class="of-item"><span class="of-num">05</span><span class="of-name">Saxofones</span></div>
+          <div class="of-item"><span class="of-num">06</span><span class="of-name">Trompetes</span></div>
+          <div class="of-item"><span class="of-num">07</span><span class="of-name">Trompas</span></div>
+        </div>
+        <div class="of-col">
+          <div class="of-item"><span class="of-num">08</span><span class="of-name">Trombones</span></div>
+          <div class="of-item"><span class="of-num">09</span><span class="of-name">Tubas e Eufônios</span></div>
+          <div class="of-item"><span class="of-num">10</span><span class="of-name">Percussão</span></div>
+          <div class="of-item"><span class="of-num">11</span><span class="of-name">Violinos e Violas</span></div>
+          <div class="of-item"><span class="of-num">12</span><span class="of-name">Cellos e Baixos</span></div>
+          <div class="of-item"><span class="of-num">13</span><span class="of-name">Base</span></div>
+        </div>
+      </div>
+      <div class="of-cta">
+        <p class="of-obs">A inscrição é única e gratuita. No formulário você indica a oficina do seu instrumento.</p>
+        <a href="https://forms.gle/uy5AdrfwZbZbWnFG9" target="_blank" class="btn-primary" style="font-size:.95rem;padding:1rem 3rem;">Fazer inscrição gratuita →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPERTÓRIO -->
+  <section id="repertorio">
+    <div class="section-header">
+      <span class="section-tag">Participe!</span>
+      <h2 class="section-title">Grande Orquestra EBOEMG 2026</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Acesse o link das partituras e prepare-se para tocar conosco!</p>
+    </div>
+    <div class="container" style="text-align:center;">
+      <div class="repertorio-list">
+        <p><strong>Músicas deste ano:</strong></p>
+        <ul>
+          <li>🎵 Harpa Cristã In Concert</li>
+          <li>🎵 You Raise Me Up (Tu me Levantas)</li>
+        </ul>
+        <a href="https://drive.google.com/drive/folders/1iPYRE51cQDKpWmY1f6vKihJa0vLtc9pl?usp=sharing" target="_blank" class="btn-primary">Acessar Partituras →</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- PROGRAMAÇÃO -->
+  <section id="programacao">
+    <div class="section-header">
+      <span class="section-tag">30 de Maio de 2026 — Sábado</span>
+      <h2 class="section-title">Programação</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Um dia completo de formação, música e adoração.</p>
+    </div>
+    <div class="container">
+      <div class="prog-list">
+        <div class="prog-item"><div class="prog-time">13:00</div><div class="prog-info"><h4>Abertura Oficial</h4><p>Boas-vindas e início do encontro</p></div><span class="prog-badge badge-culto">Abertura</span></div>
+        <div class="prog-item"><div class="prog-time">13:30</div><div class="prog-info"><h4>Oficinas por Naipe</h4><p>13 oficinas simultâneas com instrutores especializados</p></div><span class="prog-badge badge-oficina">Oficina</span></div>
+        <div class="prog-item"><div class="prog-time">16:00</div><div class="prog-info"><h4>Fechamento da Parte Técnica</h4><p>Encerramento das oficinas</p></div><span class="prog-badge badge-social">Técnico</span></div>
+        <div class="prog-item"><div class="prog-time">16:30</div><div class="prog-info"><h4>Ensaio do Grande Grupo EBOEMG 2026</h4><p>Todos os músicos reunidos sob a regência do Mto. Joel de Amorim</p></div><span class="prog-badge badge-ensaio">Ensaio</span></div>
+        <div class="prog-item"><div class="prog-time">17:30</div><div class="prog-info"><h4>Intervalo — Lanche</h4><p>Momento de confraternização entre os músicos</p></div><span class="prog-badge badge-social">Intervalo</span></div>
+        <div class="prog-item"><div class="prog-time">18:00</div><div class="prog-info"><h4>Apresentação das Bandas e Orquestras</h4><p>Culto de encerramento e louvor com apresentações musicais das bandas, orquestras e big bands inscritas</p></div><span class="prog-badge badge-apres">Apresentação</span></div>
+        <div class="prog-item"><div class="prog-time">21:30</div><div class="prog-info"><h4>Encerramento</h4><p>Agradecimentos e homenagens</p></div><span class="prog-badge badge-enc">Encerramento</span></div>
+      </div>
+    </div>
+  </section>
+
+   <!-- MODAL PROFESSOR -->
+  <div class="prof-modal-overlay" id="prof-modal" onclick="if(event.target===this)fecharProfModal()">
+    <div class="prof-modal-box">
+      <button class="prof-modal-close" onclick="fecharProfModal()">✕</button>
+      <div class="prof-modal-header">
+        <div id="prof-modal-foto-wrap"></div>
+        <div class="prof-modal-title">
+          <span class="prof-modal-naipe" id="prof-modal-naipe"></span>
+          <span class="prof-modal-nome"  id="prof-modal-nome"></span>
+        </div>
+      </div>
+      <div class="prof-modal-body" id="prof-modal-body"></div>
+    </div>
+  </div>
+
+  <section id="professores">
+  <div class="section-header">
+    <span class="section-tag">Corpo Docente</span>
+    <h2 class="section-title">Professores</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">Clique em cada professor para ver o currículo completo.</p>
+  </div>
+
+  <div class="professores-grid container">
+    
+    <div class="professor-card" onclick="abrirProfModal('Regência', 'Pr. Joel de Amorim', 'Músico, maestro e pastor com ampla experiência na direção de corais, orquestras e bandas de louvor em igrejas evangélicas. É reconhecido por seus arranjos e partituras de música cristã, utilizados por ministérios de adoração em todo o Brasil. Atua como maestro em denominações evangélicas, integrando música e pregação em eventos, cultos e seminários, com foco na formação de músicos e no enriquecimento do ministério de louvor nas igrejas. Convidado para palestras e seminários de cunho musical, traz uma abordagem prática, devocional e técnica, voltada tanto para músicos quanto para líderes.', `<img src=\'Joeldeamorim.jpg\' alt=\'Pr. Joel de Amorim\' class=\'prof-modal-foto\' />`)">
+      <div class="prof-foto-overlay">
+        <img src="Joeldeamorim.png" alt="Pr. Joel de Amorim" class="prof-foto" />
+      </div>
+      <div class="prof-info">
+        <span class="prof-naipe">Regência</span>
+        <span class="prof-nome">Pr. Joel de Amorim</span>
+        <span class="prof-bio">Músico, maestro e pastor. Regente de corais, orquestras e bandas de louvor. Arranjos utilizados em ministérios em todo o Brasil.</span>
+      </div>
+    </div>
+
+    <div class="professor-card" onclick="abrirProfModal('Flautas', 'Miller Moraes', 'Miller Moraes iniciou seus estudos musicais com o professor Vane Tavares. Em 2000, ingressou na Escola de Música Villa Lobos, com Paulo Telles e Carlos Alberto Rodrigues. Em 2008, ingressou na UFRJ, concluindo o Bacharelado em Flauta Transversal em 2013 sob orientação de Eduardo Monteiro e Afonso Oliveira. Participou de grupos e orquestras como a Academia Petrobras Sinfônica e o OSB Jovem, com apresentação na Alemanha com o Quinteto Experimental de Sopros da UFRJ. Participou de Master Classes no Festival Brasil-Alemanha com Will Sanders e Renate Grass-Armin. Em 2011, foi aprovado como solista da ORSEM interpretando o Concerto em Sol Maior de Mozart. Participou dos musicais HAIR e O Mágico de Oz. Membro do Quinteto Lorenzo Fernandes, conquistando o 2º lugar no Festival Villa-Lobos em 2012. Atuou como flautista na Banda Filarmônica do RJ e na Orquestra Sinfônica de Barra Mansa, com turnês ao lado dos ballets Mariinsky e Bolshoi.', `<img src=\'MillerMoraes.jpeg\' alt=\'Miller Moraes\' class=\'prof-modal-foto\' />`)">
+      <div class="prof-foto-overlay">
+        <img src="MillerMoraes.jpeg" alt="Miller Moraes" class="prof-foto" />
+      </div>
+      <div class="prof-info">
+        <span class="prof-naipe">Flautas</span>
+        <span class="prof-nome">Miller Moraes</span>
+        <span class="prof-bio">Bacharel em Flauta Transversal pela UFRJ. Integrou a Academia Petrobras Sinfônica, OSB Jovem e realizou apresentações na Alemanha.</span>
+      </div>
+    </div>
+      <div class="professor-card" onclick="abrirProfModal('Palhetas Duplas', 'Francisco Silva (Chico)', 'Francisco nasceu em Fortaleza e iniciou seus estudos de fagote em 2003 no Projeto de Educação Musical do Santuário de Aparecida. Em 2013, ingressou na Academia de Música da Osesp, estudando com Francisco Formiga e Romeu Rabelo. Participou de festivais renomados como o Internacional de Campos do Jordão, aperfeiçoando-se com Klaus Thunemann, e realizou masterclasses com grandes nomes internacionais como Stéphane Lévesque e Gustavo Nuñes. Antes de integrar a Filarmônica de Minas Gerais, atuou em importantes grupos como a Bachiana Filarmônica e a própria Osesp. Atualmente, ocupa o cargo de fagotista e contrafagotista na Orquestra Filarmônica de Minas Gerais.', `<img src=\'Franciscosilva.jpg\' alt=\'Francisco Silva (Chico)\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="Franciscosilva.jpg" alt="Francisco Silva (Chico)" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Palhetas Duplas</span>
+    <span class="prof-nome">Francisco Silva (Chico)</span>
+    <span class="prof-bio">Fagotista e contrafagotista da Filarmônica de MG. Formado pela Academia da Osesp com aperfeiçoamento internacional.</span>
+  </div>
+</div>
+      <div class="professor-card" onclick="abrirProfModal('Clarinetes', 'Jonatas Fernandes Bueno Costa', 'Jonatas Bueno nasceu em São Paulo e iniciou seus estudos na Emesp. Graduou-se em Clarinete pela Unesp sob orientação de Sérgio Burgani. Participou de masterclasses com nomes como Wenzel Fuchs e Christoph Muller. Foi vencedor de diversas edições dos concursos Jovens Solistas da Sinfônica de Guarulhos e da Banda Sinfônica Jovem de SP. Em 2012, conquistou o 1º lugar em Música de Câmara no concurso Pré-Estreia da TV Cultura. Integrou importantes grupos como a Orquestra Jovem Tom Jobim e a OCAM-USP. Atualmente, é Principal Assistente da Orquestra Filarmônica de Minas Gerais.', `<img src=\'JonatasBueno.jpeg\' alt=\'Jonatas Fernandes Bueno Costa\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="JonatasBueno.jpeg" alt="Jonatas Fernandes Bueno Costa" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Clarinetes</span>
+    <span class="prof-nome">Jonatas Fernandes Bueno Costa</span>
+    <span class="prof-bio">Bacharel pela Unesp e Principal Assistente da Filarmônica de MG. Premiado em diversos concursos de solistas e música de câmara.</span>
+  </div>
+</div>
+
+<div class="professor-card" onclick="abrirProfModal('Saxofones', 'Diogo Gonçalves', 'Diogo Gonçalves é músico militar da Força Aérea Brasileira, maestro e pastor da Assembleia de Deus Dom Pedro I, no Ministério de Vespasiano. Alia sua sólida formação musical militar à atuação ministerial, dedicando-se intensamente ao desenvolvimento da música instrumental e à formação de músicos nas igrejas evangélicas.', `<img src=\'Diogo Saxofone.jpeg\' alt=\'Diogo Gonçalves\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="Diogo Saxofone.jpeg" alt="Diogo Gonçalves" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Saxofones</span>
+    <span class="prof-nome">Diogo Gonçalves</span>
+    <span class="prof-bio">Músico militar da FAB, maestro e pastor. Especialista no desenvolvimento da música instrumental em contextos ministeriais.</span>
+  </div>
+</div>
+      <div class="professor-card" onclick="abrirProfModal('Trompetes', 'Renzo Albierre da Costa', 'Renzo Albierre da Costa é Bacharel em Música pela UFMG. Foi professor de trompete no projeto de música da Vallourec, membro do Quinteto de Trompetes Uai Brass e da Orquestra Sinfônica de Betim. Atualmente é trompetista da Orquestra Sinfônica de Minas Gerais.', `<img src=\'RenzoCosta.jpeg\' alt=\'Renzo Albierre da Costa\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="RenzoCosta.jpeg" alt="Renzo Albierre da Costa" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Trompetes</span>
+    <span class="prof-nome">Renzo Albierre da Costa</span>
+    <span class="prof-bio">Bacharel pela UFMG. Trompetista da Orquestra Sinfônica de Minas Gerais. Ex-professor do projeto Vallourec e membro do Uai Brass.</span>
+  </div>
+</div>
+      <div class="professor-card" onclick="abrirProfModal('Trompas', 'Brayan dos Anjos', 'Brayan dos Anjos é graduando em Trompa pela Universidade Federal de Minas Gerais (UFMG). Atua como músico na Banda de Música do Corpo de Bombeiros Militar de Minas Gerais (CBMMG), onde desenvolve sua carreira profissional aliando a sólida formação acadêmica à experiência prática em bandas militares.', `<img src=\'BrayandosAnjos.jpeg\' alt=\'Brayan dos Anjos\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="BrayandosAnjos.jpeg" alt="Brayan dos Anjos" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Trompas</span>
+    <span class="prof-nome">Brayan dos Anjos</span>
+    <span class="prof-bio">Graduando em Trompa pela UFMG e músico da Banda de Música do Corpo de Bombeiros de MG.</span>
+  </div>
+</div>
+
+<div class="professor-card" onclick="abrirProfModal('Trombones', 'Jackson Pires Gonçalves', 'Jackson Pires Gonçalves é bacharel em Música pela UFMG com habilitação em Trombone de Vara, e cursa Regência de Bandas no CEFART (Fundação Clóvis Salgado). Atua como professor de sopros em projetos sociais, ministra aulas de teoria musical em igrejas e exerce a regência de bandas e orquestras cristãs.', `<img src=\'JacksonGonçalves.jpeg\' alt=\'Jackson Pires Gonçalves\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="JacksonGonçalves.jpeg" alt="Jackson Pires Gonçalves" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Trombones</span>
+    <span class="prof-nome">Jackson Pires Gonçalves</span>
+    <span class="prof-bio">Bacharel pela UFMG e regente pelo CEFART. Especialista em sopros e regência de orquestra cristã.</span>
+  </div>
+</div>
+
+<div class="professor-card" onclick="abrirProfModal('Tubas e Eufônios', 'Elias Antônio da Costa', 'Elias Antônio da Costa iniciou seus estudos na Assembleia de Deus de Belo Horizonte. Estudou Regência de Bandas pela Fundação Clóvis Salgado e graduou-se em Tuba/Euphonium pela UEMG. Atualmente, é Tubista da Orquestra Sinfônica da Polícia Militar de MG (OSPMG) e Eufonista da Banda da PMMG.', `<img src=\'EliasCosta.jpeg\' alt=\'Elias Antônio da Costa\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="EliasCosta.jpeg" alt="Elias Antônio da Costa" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Tubas e Eufônios</span>
+    <span class="prof-nome">Elias Antônio da Costa</span>
+    <span class="prof-bio">Graduado pela UEMG. Tubista da OSPMG e Eufonista da Banda da PMMG.</span>
+  </div>
+</div>
+
+<div class="professor-card" onclick="abrirProfModal('Percussão', 'Jediael Koitel', 'Jediael Koitel iniciou sua trajetória musical aos 4 anos. Foi músico do Exército e da Marinha do Brasil, atuando como instrutor de percussão. Atualmente integra a Orquestra Sinfônica da PMMG como Timpanista. Possui vasta experiência internacional, incluindo intercâmbio na West Point Band (NY) e apresentações no Carnegie Hall e no festival de Edimburgo na Escócia.', `<img src=\'JediaelKoite.jpeg\' alt=\'Jediael Koitel\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="JediaelKoite.jpeg" alt="Jediael Koitel" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Percussão</span>
+    <span class="prof-nome">Jediael Koitel</span>
+    <span class="prof-bio">Timpanista da OSPMG com carreira internacional (EUA e Escócia). Ex-músico do Exército e Marinha.</span>
+  </div>
+</div>
+
+<div class="professor-card" onclick="abrirProfModal('Violinos e Violas', 'Elder Freitas Dias', 'Elder Freitas Dias é Sargento da PMMG e bacharel em Violino pela UFMG. Atuou como spalla da Orquestra Sinfônica do Vale do Aço e integrou a Orquestra Sinfônica de Minas Gerais. Com sólida formação ministerial, colabora atualmente com a Orquestra da Polícia Militar de MG e integra a Orquestra Vida desde 2011.', `<img src=\'ElderFreitasDias.png\' alt=\'Elder Freitas Dias\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="ElderFreitasDias.png" alt="Elder Freitas Dias" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Violinos e Violas</span>
+    <span class="prof-nome">Elder Freitas Dias</span>
+    <span class="prof-bio">Bacharel pela UFMG e Sargento da PMMG. Ex-Spalla da Sinfônica do Vale do Aço.</span>
+  </div>
+</div>
+      <div class="professor-card" onclick="abrirProfModal('Cellos e Baixos', 'Leia Paula Gomes de Oliveira Assis', 'Leia Paula iniciou sua formação na Escola de Formação de Instrumentistas de Cordas (EFIC) do Teatro Sesiminas. É licenciada em Música pela UEMG, com habilitação em Violoncelo de Orquestra. Sua trajetória inclui passagens pela Orquestra Sinfônica de Betim e pelo Grupo de Câmara do TJMG. Além de sua atuação como instrumentista na Orquestra Sinfônica da ESMU-UEMG, dedica-se ao ensino de violoncelo e à musicalização infantil desde 2018.', `<img src=\'LeiaPaula.jpeg\' alt=\'Leia Paula Gomes de Oliveira Assis\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="LeiaPaula.jpeg" alt="Leia Paula Gomes de Oliveira Assis" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Cellos e Baixos</span>
+    <span class="prof-nome">Leia Paula Gomes de Oliveira Assis</span>
+    <span class="prof-bio">Licenciada pela UEMG (Violoncelo). Experiência na Sinfônica de Betim e Grupo de Câmara do TJMG. Especialista em musicalização.</span>
+  </div>
+</div>
+     <div class="professor-card" onclick="abrirProfModal('Base', 'Gilson da Silva Brito', 'Gilson da Silva Brito possui sólida formação em violão erudito obtida em Mato Grosso. Atua como arranjador, educador musical, concertista e músico freelancer. Sua trajetória é marcada por uma vasta experiência no desenvolvimento de arranjos para diversos grupos instrumentais, além de uma presença ativa em projetos de educação musical e performances como solista e colaborador.', `<img src=\'GilsonBrito.jpeg\' alt=\'Gilson da Silva Brito\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="GilsonBrito.jpeg" alt="Gilson da Silva Brito" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Base</span>
+    <span class="prof-nome">Gilson da Silva Brito</span>
+    <span class="prof-bio">Violonista erudito, arranjador e concertista. Especialista em educação musical e arranjos para grupos instrumentais.</span>
+  </div>
+</div>
+     <div class="professor-card" onclick="abrirProfModal('Educação Musical', 'Pedagogia da Musicalização Infantil', 'Esta disciplina foca na capacitação técnica e didática do educador musical. O conteúdo abrange as principais metodologias ativas (como Dalcroze, Kodály e Orff) aplicadas ao contexto atual, planejamento de currículo para diferentes faixas etárias, e a psicologia do desenvolvimento musical. O objetivo é instrumentalizar o professor para que ele possa criar aulas que desenvolvam a percepção rítmica, melódica e a apreciação musical de forma estruturada e profissional.', `<img src=\'pedagogia_musical.jpg\' alt=\'Pedagogia da Musicalização\' class=\'prof-modal-foto\' />`)">
+  <div class="prof-foto-overlay">
+    <img src="pedagogia_musical.jpg" alt="Pedagogia da Musicalização Infantil" class="prof-foto" />
+  </div>
+  <div class="prof-info">
+    <span class="prof-naipe">Formação Pedagógica</span>
+    <span class="prof-nome">Pedagogia da Musicalização Infantil</span>
+    <span class="prof-bio">Didática e metodologias de ensino musical. Foco na capacitação de professores, regentes e líderes de departamentos infantis.</span>
+  </div>
+</section>
+   
+  <!-- FLYERS -->
+  <section id="flyers">
+    <div class="section-header">
+      <span class="section-tag">Material Visual</span>
+      <h2 class="section-title">Flyers & Material</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Baixe e compartilhe os materiais do EBOEMG 2026.</p>
+    </div>
+    <div class="flyers-grid container">
+      <div class="flyer-card"><div class="flyer-icon">🎺</div><div class="flyer-label">Flyer Principal</div><div class="flyer-sub">EBOEMG 2026</div></div>
+      <div class="flyer-card"><div class="flyer-icon">📅</div><div class="flyer-label">Programação</div><div class="flyer-sub">Agenda do dia</div></div>
+      <div class="flyer-card"><div class="flyer-icon">🎓</div><div class="flyer-label">Oficinas</div><div class="flyer-sub">13 naipes disponíveis</div></div>
+    </div>
+  </section>
+
+ <!-- LOCAL -->
+  <section id="local">
+    <div class="section-header">
+      <span class="section-tag">Onde será</span>
+      <h2 class="section-title">Local do Evento</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="local-grid">
+      <div class="map-frame">
+        <div class="map-icon">📍</div>
+        <p>Assembleia de Deus<br>Templo Central<br>Rua São Paulo, 1341 — Centro, BH</p>
+        <a href="https://maps.google.com/?q=Rua+S%C3%A3o+Paulo,+1341,+Centro,+Belo+Horizonte,+MG" target="_blank" class="map-link">📍 Ver no Google Maps</a>
+      </div>
+      <div class="local-info">
+        <h3>Informações do Local</h3>
+        <div class="local-detail"><div class="local-detail-icon">🏛️</div><div class="local-detail-text"><strong>Local</strong><span>Assembleia de Deus<br>Templo Central</span></div></div>
+        <div class="local-detail"><div class="local-detail-icon">📍</div><div class="local-detail-text"><strong>Endereço</strong><span>Rua São Paulo, 1341<br>Centro — Belo Horizonte / MG</span></div></div>
+        <div class="local-detail"><div class="local-detail-icon">📅</div><div class="local-detail-text"><strong>Data</strong><span>30 de Maio de 2026 — Sábado</span></div></div>
+        <div class="local-detail"><div class="local-detail-icon">🕐</div><div class="local-detail-text"><strong>Horário</strong><span>13h00 — abertura<br>21h30 — encerramento</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="section-header">
+      <span class="section-tag">Fale conosco</span>
+      <h2 class="section-title">Contato</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contato-grid container">
+      <div class="contato-card"><div class="contato-icon">📱</div><div class="contato-tipo">Telefone</div><div class="contato-val"><a href="tel:+553133034000">(31) 3303-4000</a></div></div>
+      <div class="contato-card"><div class="contato-icon">💬</div><div class="contato-tipo">WhatsApp</div><div class="contato-val"><a href="https://wa.me/5531984940477" target="_blank">(31) 98494-0477</a></div></div>
+      <div class="contato-card"><div class="contato-icon">📸</div><div class="contato-tipo">Instagram</div><div class="contato-val"><a href="https://instagram.com/eboemg" target="_blank">@eboemg</a></div></div>
+    </div>
+  </section>
+
+<!-- REALIZAÇÃO -->
+  <section id="realizacao">
+    <div class="section-header">
+      <span class="section-tag">Organização</span>
+      <h2 class="section-title">Realização</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="realizacao-wrap">
+
+   <div class="realizacao-container">
+  <div class="realizacao-logo">
+    <img src="LogosIDEADBHPreta.png" alt="Logos Assembleia de Deus BH e Projeto IDE" class="logo-integrada" />
+  </div>
+</div>
+
+      <!-- PRESIDENTE -->
+      <div style="width:100%;max-width:500px;">
+        <div class="coord-block-title">Presidente</div>
+        <div class="pessoa-card">
+         <img src="Pastorpaulo.jpg" alt="Pr. Paulo Cézar Pereira" class="pessoa-foto-round" />
+          <div class="pessoa-info">
+            <span class="pessoa-cargo">Presidente</span>
+            <span class="pessoa-nome">Pr. Paulo Cézar Pereira</span>
+            <span class="pessoa-igreja">AD Ministério Belo Horizonte</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COORDENADORIA GERAL DE MÚSICA -->
+      <div class="coord-block">
+        <div class="coord-block-title">Coordenadoria Geral de Música ADBH</div>
+        <div class="coord-grid">
+          <div class="coord-card">
+            <img src="Antoniosoares.jpg" alt="Ev. Mto. Antônio Vicente Soares" class="coord-foto" />
+            <div class="coord-info">
+              <span class="coord-cargo">Coordenador</span>
+              <span class="coord-nome">Ev. Mto. Antônio Vicente Soares</span>
+            </div>
+          </div>
+          <div class="coord-card">
+            <img src="Azarias.jpg" alt="..." class="pessoa-foto-round" />
+            <div class="coord-info">
+              <span class="coord-cargo">Coordenador</span>
+              <span class="coord-nome">Pr. Azarias Ramos</span>
+            </div>
+          </div>
+          <div class="coord-card">
+            <img src="Antoniodepaulo.jpg" alt="Pr. Antônio de Paulo" class="coord-foto" />
+            <div class="coord-info">
+              <span class="coord-cargo">Supervisor</span>
+              <span class="coord-nome">Pr. Antônio de Paulo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- ORGANIZAÇÃO DO EVENTO -->
+      <div class="coord-block">
+        <div class="coord-block-title">Organização do Evento</div>
+        <div class="org-list">
+          <div class="org-item">
+            <div class="org-left">
+              <span class="org-cargo">Coordenação</span>
+              <span class="org-nome">Pb. Elias Antonio da Costa</span>
+            </div>
+            <a href="https://wa.me/5531984940477" target="_blank" class="org-whatsapp">📱 (31) 98494-0477</a>
+          </div>
+          <div class="org-item">
+            <div class="org-left">
+              <span class="org-cargo">Auxiliar</span>
+              <span class="org-nome">Dc. Celso Cândido de Oliveira</span>
+            </div>
+            <a href="https://wa.me/5531985338073" target="_blank" class="org-whatsapp">📱 (31) 98533-8073</a>
+          </div>
+          <div class="org-item">
+            <div class="org-left">
+              <span class="org-cargo">Secretário(a)</span>
+              <span class="org-nome" style="opacity:.4;font-style:italic;">A definir</span>
+            </div>
+            <span class="org-whatsapp" style="opacity:.3;">📱 WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="LogosIDEADBHPreta.png" alt="AD Ministério BH" class="footer-logo-img" />
+    <div class="footer-logo">EBOEMG</div>
+    <div class="footer-sub">Encontro das Bandas e Orquestras Evangélicas de Minas Gerais</div>
+    <div class="footer-realizacao">Realização: AD Ministério Belo Horizonte</div>
+    <div class="footer-links">
+      <a href="#sobre">Sobre</a><a href="#maestro">Maestro</a>
+      <a href="#oficinas">Oficinas</a><a href="#programacao">Programação</a>
+      <a href="#local">Local</a><a href="#realizacao">Realização</a><a href="#professores">Professores</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" class="social-btn" title="Instagram">📸</a>
+      <a href="#" class="social-btn" title="Facebook">📘</a>
+      <a href="#" class="social-btn" title="YouTube">▶️</a>
+      <a href="https://wa.me/553133034000" class="social-btn" title="WhatsApp">💬</a>
+    </div>
+    <div class="footer-copy">© 2026 EBOEMG — Todos os direitos reservados · Soli Deo Gloria</div>
+  </footer>
+
+  <script>
+    // NAV
+    window.addEventListener('scroll', function() {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // COUNTDOWN — 30/05/2026 às 13h00
+    function tick() {
+      var diff = new Date('2026-05-30T13:00:00') - new Date();
+      if (diff <= 0) {
+        ['days','hours','mins','secs'].forEach(function(k) { document.getElementById('cnt-'+k).textContent = '00'; });
+        return;
+      }
+      document.getElementById('cnt-days').textContent  = String(Math.floor(diff/864e5)).padStart(2,'0');
+      document.getElementById('cnt-hours').textContent = String(Math.floor(diff%864e5/36e5)).padStart(2,'0');
+      document.getElementById('cnt-mins').textContent  = String(Math.floor(diff%36e5/6e4)).padStart(2,'0');
+      document.getElementById('cnt-secs').textContent  = String(Math.floor(diff%6e4/1e3)).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // MODAL
+    function abrirModal() {
+      document.getElementById('modal-projeto').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function fecharModal() {
+      document.getElementById('modal-projeto').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function abrirProfModal(naipe, nome, curriculo, fotoHtml) {
+      document.getElementById('prof-modal-naipe').textContent = naipe;
+      document.getElementById('prof-modal-nome').textContent  = nome;
+      document.getElementById('prof-modal-foto-wrap').innerHTML = fotoHtml;
+      var body = document.getElementById('prof-modal-body');
+      body.innerHTML = curriculo.split('\n').map(function(p){ return p ? '<p>'+p+'</p>' : ''; }).join('');
+      document.getElementById('prof-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function fecharProfModal() {
+      document.getElementById('prof-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { fecharModal(); fecharProfModal(); }
+    });
+  </script>
+</body>
+</html>
