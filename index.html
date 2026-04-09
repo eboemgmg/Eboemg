@@ -215,14 +215,97 @@
     .realizacao-pastor-info { text-align: center; } 
     .realizacao-logo img { max-width: 280px; } /* Ajuste para celular */
 }
-    /* FLYERS */
-    #flyers { background: var(--bg); }
-    .flyers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
-    .flyer-card { aspect-ratio: 3/4; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg2); transition: transform .3s, border-color .3s; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; padding: 2rem; }
-    .flyer-card:hover { transform: scale(1.02); border-color: var(--border); }
-    .flyer-icon { font-size: 2.5rem; opacity: .18; }
-    .flyer-label { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--white); text-align: center; opacity: .38; }
-    .flyer-sub { font-size: .7rem; color: var(--cream); opacity: .22; text-align: center; letter-spacing: .1em; }
+   /* --- SEÇÃO DE FLYERS --- */
+#flyers { background: var(--bg); padding: 60px 0; }
+
+.flyers-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); 
+    gap: 1.5rem; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+}
+
+.flyer-card { 
+    aspect-ratio: 3/4; 
+    border-radius: 6px; 
+    border: 1px solid var(--border2); 
+    background: var(--bg2); 
+    transition: transform .3s, border-color .3s, box-shadow .3s; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: .8rem; 
+    padding: 1.5rem; 
+    overflow: hidden; 
+}
+
+.flyer-card:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--gold); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+}
+
+/* Container da Miniatura para o efeito de Zoom */
+.flyer-preview-wrapper {
+    position: relative;
+    width: 100px;
+    height: 130px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border2);
+}
+
+.flyer-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.flyer-zoom-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.flyer-card:hover .flyer-zoom-overlay { opacity: 1; }
+.flyer-card:hover .flyer-thumbnail { transform: scale(1.1); }
+
+.flyer-zoom-overlay span {
+    color: #fff;
+    font-size: 0.7rem;
+    border: 1px solid #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.flyer-icon { font-size: 2.5rem; opacity: .18; }
+
+.flyer-label { 
+    font-family: 'DM Serif Display', serif; 
+    font-size: 1.1rem; 
+    color: var(--white); 
+    text-align: center; 
+    opacity: 0.8; 
+}
+
+.flyer-sub { 
+    font-size: .7rem; 
+    color: var(--gold); 
+    opacity: 0.6; 
+    text-align: center; 
+    letter-spacing: .1em; 
+    text-transform: uppercase;
+}
 
     /* CONTATO */
     #contato { background: var(--bg3); }
@@ -263,8 +346,8 @@
     .prof-modal-title { display:flex; flex-direction:column; gap:.3rem; }
     .prof-modal-naipe { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); }
     .prof-modal-nome  { font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--white); line-height:1.2; }
-    .prof-modal-body  { font-size:.9rem; color:var(--cream); opacity:.72; line-height:1.85; }
-    .prof-modal-body p { margin-bottom:.8rem; }
+    .prof-modal-body  { font-size:.9rem; color:var(--cream); opacity:.72; line-height:1.85; text-align: justify; word-break: break-word;}
+    .prof-modal-body p { margin-bottom:.8rem; text-align: justify; }
     /* Card clicável */
     .professor-card { cursor:pointer; }
     .professor-card .prof-foto-overlay { position:relative; }
@@ -718,18 +801,36 @@
    
   <!-- FLYERS -->
   <section id="flyers">
-    <div class="section-header">
-      <span class="section-tag">Material Visual</span>
-      <h2 class="section-title">Flyers & Material</h2>
-      <div class="section-divider"></div>
-      <p class="section-desc">Baixe e compartilhe os materiais do EBOEMG 2026.</p>
+  <div class="section-header">
+    <span class="section-tag">Material Visual</span>
+    <h2 class="section-title">Flyers & Material</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">Baixe e compartilhe os materiais do EBOEMG 2026.</p>
+  </div>
+  
+  <div class="flyers-grid container">
+
+    <!-- Flyer com imagem preenchendo o card -->
+    <div class="flyer-card" onclick="abrirFlyerModal('Flyer.png')" style="padding:0;position:relative;overflow:hidden;">
+      <img src="Flyer.png" alt="Flyer EBOEMG 2026" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:6px;" />
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:1rem;border-radius:6px;" onmouseover="this.style.background='rgba(0,0,0,0.45)'" onmouseout="this.style.background='rgba(0,0,0,0)'">
+        <span style="color:#fff;font-size:.7rem;border:1px solid #fff;padding:3px 10px;border-radius:4px;opacity:0;transition:opacity .3s;" class="flyer-hover-label">🔍 Ampliar</span>
+      </div>
     </div>
-    <div class="flyers-grid container">
-      <div class="flyer-card"><div class="flyer-icon">🎺</div><div class="flyer-label">Flyer Principal</div><div class="flyer-sub">EBOEMG 2026</div></div>
-      <div class="flyer-card"><div class="flyer-icon">📅</div><div class="flyer-label">Programação</div><div class="flyer-sub">Agenda do dia</div></div>
-      <div class="flyer-card"><div class="flyer-icon">🎓</div><div class="flyer-label">Oficinas</div><div class="flyer-sub">13 naipes disponíveis</div></div>
+
+    <div class="flyer-card"><div class="flyer-icon">📅</div><div class="flyer-label">Programação</div><div class="flyer-sub">Agenda do dia</div></div>
+    <div class="flyer-card"><div class="flyer-icon">🎓</div><div class="flyer-label">Oficinas</div><div class="flyer-sub">13 naipes disponíveis</div></div>
+  </div>
+</section>
+
+  <!-- MODAL FLYER -->
+  <div id="modalFlyer" onclick="if(event.target===this)fecharFlyerModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:700;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px);">
+    <div style="position:relative;max-width:600px;width:100%;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <button onclick="fecharFlyerModal()" style="position:absolute;top:-2.5rem;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;line-height:1;">✕</button>
+      <img id="imgExpandida" src="" alt="Flyer EBOEMG 2026" style="max-width:100%;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,.6);" />
+      <a id="btnDownloadFlyer" href="" download="Flyer-EBOEMG-2026" style="background:var(--gold);color:var(--bg);font-weight:700;padding:.75rem 2rem;border-radius:4px;text-decoration:none;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;">⬇ Baixar Flyer</a>
     </div>
-  </section>
+  </div>
 
  <!-- LOCAL -->
   <section id="local">
@@ -898,30 +999,76 @@
     tick();
     setInterval(tick, 1000);
 
-    // MODAL
+    // MODAL GERAL
     function abrirModal() {
-      document.getElementById('modal-projeto').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      const modal = document.getElementById('modal-projeto');
+      if(modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
     }
     function fecharModal() {
-      document.getElementById('modal-projeto').classList.remove('open');
-      document.body.style.overflow = '';
+      const modal = document.getElementById('modal-projeto');
+      if(modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     }
+
+    // MODAL DE PROFESSORES
     function abrirProfModal(naipe, nome, curriculo, fotoHtml) {
-      document.getElementById('prof-modal-naipe').textContent = naipe;
-      document.getElementById('prof-modal-nome').textContent  = nome;
+      document.getElementById('prof-modal-naipe').innerText = naipe;
+      document.getElementById('prof-modal-nome').innerText = nome;
       document.getElementById('prof-modal-foto-wrap').innerHTML = fotoHtml;
       var body = document.getElementById('prof-modal-body');
       body.innerHTML = curriculo.split('\n').map(function(p){ return p ? '<p>'+p+'</p>' : ''; }).join('');
       document.getElementById('prof-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function fecharProfModal() {
       document.getElementById('prof-modal').classList.remove('open');
-      document.body.style.overflow = '';
+      document.body.style.overflow = 'auto';
     }
+
+    // MODAL DO FLYER (AMPLIAR IMAGEM)
+    function abrirFlyerModal(src) {
+      const modal = document.getElementById('modalFlyer');
+      const img   = document.getElementById('imgExpandida');
+      const link  = document.getElementById('btnDownloadFlyer');
+      if (modal && img && link) {
+        img.src   = src;
+        link.href = src;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function fecharFlyerModal() {
+      const modal = document.getElementById('modalFlyer');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // MENU MOBILE
+    function abrirMenu() {
+      document.getElementById('mob').classList.add('open');
+    }
+
+    function fecharMenu() {
+      document.getElementById('mob').classList.remove('open');
+    }
+
+    // FECHAR TUDO COM A TECLA ESC
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { fecharModal(); fecharProfModal(); }
+      if (e.key === 'Escape') { 
+        fecharProfModal(); 
+        fecharFlyerModal();
+        fecharModal();
+        fecharMenu();
+      }
     });
   </script>
 </body>
