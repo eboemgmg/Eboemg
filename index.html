@@ -414,12 +414,12 @@
       <li><a href="https://forms.gle/uy5AdrfwZbZbWnFG9" target="_blank" class="nav-cta">Inscreva-se</a></li>
       <li><a href="https://drive.google.com/drive/folders/1iPYRE51cQDKpWmY1f6vKihJa0vLtc9pl?usp=sharing" target="_blank" class="nav-cta" style="background:var(--blue);">Repertório 2026</a></li>
     </ul>
-    <button class="hamburger" onclick="document.getElementById('mob').classList.add('open')" aria-label="Menu">
+    <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <div class="mobile-menu" id="mob">
+  <div class="mobile-menu" id="mob" onclick="if(event.target===this)document.getElementById('mob').classList.remove('open')">
   <button class="mobile-close" onclick="document.getElementById('mob').classList.remove('open')">✕</button>
   
   <a href="#sobre"       onclick="document.getElementById('mob').classList.remove('open')">Sobre</a>
@@ -749,14 +749,14 @@
   </div>
 </div>
 
-<div class="professor-card" onclick="abrirProfModal('Percussão', 'Jediael Koitel', 'Jediael Koitel iniciou sua trajetória musical aos 4 anos. Foi músico do Exército e da Marinha do Brasil, atuando como instrutor de percussão. Atualmente integra a Orquestra Sinfônica da PMMG como Timpanista. Possui vasta experiência internacional, incluindo intercâmbio na West Point Band (NY) e apresentações no Carnegie Hall e no festival de Edimburgo na Escócia.', `<img src=\'JediaelKoite.jpeg\' alt=\'Jediael Koitel\' class=\'prof-modal-foto\' />`)">
+<div class="professor-card" onclick="abrirProfModal('Percussão', 'Jediael Koitel', 'Jediael Koitel nasceu em Cruz Alta, Rio Grande do Sul, em 17 de junho de 1985. Sua carreira musical começou aos 4 anos na Igreja, incentivado pelo pai, o Maestro Lauro Soares. Iniciou os estudos de bateria aos 11 anos e, aos 16, estudou clarinete para desenvolvimento da leitura e percepção musical.\n\nEm 2004, ingressou no Exército Brasileiro após aprovação em concurso para a Banda de Música, onde permaneceu por 6 anos como músico militar profissional. Em 2009, foi aprovado em 1º lugar no concurso para músico da Marinha do Brasil, atuando também como instrutor de percussão. Em 2011, foi transferido para a Banda de Música dos Fuzileiros Navais em Brasília, e no mesmo ano realizou treinamento no Conservatório Lorenzo Fernandes, no Rio de Janeiro, com o professor Eliseu Costa.\n\nEm 2013, foi aprovado no concurso para músico da Polícia Militar de Minas Gerais, integrando a Orquestra Sinfônica da PMMG (OSPMG), onde atuou como Timpanista e Percussionista.\n\nEm 2019, foi convidado a realizar intercâmbio musical na renomada West Point Band, em Nova York, onde ensinou música brasileira aos membros da Banda do Exército Norte-Americano. No mesmo ano, ministrou aulas no primeiro seminário musical da Assembly of God Church em Newark, Nova Jersey, e realizou intercâmbio com músicos do NYPD.\n\nEm 2022, se apresentou como percussionista convidado da Jubilate Orchestra no Carnegie Hall, em Nova York, e foi convidado a integrar a Metrô Big Band de Nashville, participando do maior festival de música do mundo em Edimburgo, Escócia. Realizou gravações para a Oklahoma University (Prof. Dr. Justin Pierce) e a Houston University (Prof. Dr. Daniel Prado).\n\nAtualmente desenvolve trabalho voltado à educação musical, ministrando aulas para líderes e promovendo a organização e preparação de ministérios de música em igrejas.', `<img src=\'JediaelKoite.jpeg\' alt=\'Jediael Koitel\' class=\'prof-modal-foto\' />`)">
   <div class="prof-foto-overlay">
     <img src="JediaelKoite.jpeg" alt="Jediael Koitel" class="prof-foto" />
   </div>
   <div class="prof-info">
     <span class="prof-naipe">Percussão</span>
     <span class="prof-nome">Jediael Koitel</span>
-    <span class="prof-bio">Timpanista da OSPMG com carreira internacional (EUA e Escócia). Ex-músico do Exército e Marinha.</span>
+    <span class="prof-bio">Percussionista com carreira militar nas Forças Armadas. Ex-Timpanista da OSPMG. Intercâmbio na West Point Band (NY) e concerto no Carnegie Hall (2022).</span>
   </div>
 </div>
 
